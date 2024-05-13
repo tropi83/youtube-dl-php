@@ -70,6 +70,7 @@ class Options
     ];
 
     private ?string $downloadPath = null;
+    private ?string $downloadSection = null;
     private bool $cleanupMetadata = true;
 
     // Network Options
@@ -252,6 +253,19 @@ class Options
     public function getDownloadPath(): ?string
     {
         return $this->downloadPath;
+    }
+
+    public function downloadSection(string $downloadSection): self
+    {
+        $new = clone $this;
+        $new->downloadSection = $downloadSection;
+
+        return $new;
+    }
+
+    public function getDownloadSection(): ?string
+    {
+        return $this->downloadSection;
     }
 
     public function cleanupMetadata(bool $cleanup): self
@@ -917,7 +931,7 @@ class Options
         return $new;
     }
 
-    /**
+    /**y
      * Write video description to a .description file.
      */
     public function writeDescription(bool $writeDescription): self
@@ -1717,6 +1731,7 @@ class Options
             'batch-file' => $this->batchFile,
             'id' => $this->id,
             'output' => $this->downloadPath.'/'.$this->output,
+            'download-section' => $this->downloadSection,
             'autonumber-start' => $this->autoNumberStart,
             'restrict-filenames' => $this->restrictFilenames,
             'windows-filenames' => $this->windowsFilenames,
